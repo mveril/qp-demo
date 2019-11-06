@@ -50,6 +50,8 @@ RUN /bin/bash -c "source quantum_package.rc ; ninja"
 RUN /bin/bash -c "source quantum_package.rc ; qp_test -a"
 # Return to the user directory
 WORKDIR /home/$user/
+# add examples
+COPY --chown=$user  examples examples
 RUN echo "set -g default-command /home/$user/qp2/bin/qpsh" >> .tmux.conf
 RUN echo "shell \"/home/$user/qp2/bin/qpsh\"" >> .screenrc
 # start a qp shell when run
