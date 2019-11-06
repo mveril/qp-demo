@@ -1,0 +1,33 @@
+#!/usr/bin/env qpsh
+
+# This second tutorial consists in obtaining the FCI energy of the
+# H2O2 molecule. The geometry is given here in z-matrix format.
+#
+# To accelerate the convergence, instead of using Hartree-Fock MOs
+# we will use CISD natural orbitals.
+
+# 1. Create the EZFIO database, with the 6-31g basis set:
+
+qp create_ezfio -b sto-6g_star h2o2.zmt
+
+# 2. Run the Hartree-Fock calculation:
+
+qp run scf | tee scf.out
+
+# 3. Set the core MOs as frozen:
+
+qp set_frozen_core
+
+# 4. Run a CISD
+
+qp run cisd | tee cisd.out
+
+# 5. Obtain the natural orbitals of the CISD, and use them from now on
+
+qp run save_natorb
+
+# 6. Run the selected FCI with the CISD natural orbitals
+
+qp run fci | tee fci.out
+
+

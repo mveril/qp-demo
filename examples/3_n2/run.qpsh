@@ -1,0 +1,49 @@
+#!/usr/bin/env qpsh
+
+# In this third tutorial, we will compute the ground state and the lowest
+# singly excited of N2.
+
+# 1. Create the EZFIO database, with the def2-svp basis set:
+
+qp create_ezfio -b def2-svp n2.zmt
+
+# 2. Run the Hartree-Fock calculation:
+
+qp run scf | tee scf.out
+
+# 3. Set the core MOs as frozen:
+
+qp set_frozen_core
+
+# 4. Request for two states
+
+qp set determinants n_states 2
+
+# 5. Run a CIS
+
+qp run cis
+
+# 6. Truncate the wave function to the 2 most important determinants : the
+#    Hartree-Fock and one a singly excited determinant (spin symmetry will 
+#    be automatically restored in the next calculation)
+
+qp edit -n 2
+
+# 7. Set the CIS wave function as the starting trial wave function
+
+qp set determinants read_wf True
+
+# 8. To avoid collapsing to the ground state and a doubly excited state,
+#    force to use a state-following algorithm
+
+qp set davidson state_following True
+
+# 9. Terminate when we have 50000 determinants
+
+qp set determinants n_det_max 50*10**3
+
+# 10. Run the selected FCI calculation
+
+qp run fci | tee fci.out
+
+

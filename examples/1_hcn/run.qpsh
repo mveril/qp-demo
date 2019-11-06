@@ -1,0 +1,42 @@
+#!/usr/bin/env qpsh
+
+# This first tutorial consists in obtaining the FCI energy of the HCN molecule.
+# You can execute the commands interactively or you can execute this script.
+# 
+# In interactive sessions, don't hesitate to use tab-completion with qp
+# commands.
+#
+# To know what a qp command does, you can use qp man, for example:
+#
+# qp man qp_edit
+
+
+
+# 1. Create the EZFIO database, with the STO-6G* basis set:
+
+qp create_ezfio -b sto-6g_star hcn.xyz
+
+# 2. Run the Hartree-Fock calculation:
+
+qp run scf | tee scf.out
+
+# 3. Set the core MOs as frozen:
+
+qp set_frozen_core
+
+# 4. Run the selected Full-CI:
+
+qp run fci | tee fci.out
+
+
+
+# To see all the possible control parameters, you can do
+#
+# qp edit
+#
+# which will open a virtual input file in a text editor.
+# The choice of the editor can be set via the EDITOR environment variable:
+#
+# export EDITOR=vim
+#
+
