@@ -35,11 +35,12 @@ USER $user
 ENV USER=$user
 # Go to home
 WORKDIR /home/$user
-# untar directly static quantum package and examples
+# untar directly static quantum package
 ADD quantum_package_static.tar.gz .
-COPY --chown=$user  examples examples
 # move quantum package
 RUN mv quantum_package_static qp2
+# add examples
+COPY --chown=$user  examples examples
 RUN echo "set -g default-command /home/$user/qp2/bin/qpsh" >> .tmux.conf
 RUN echo "shell \"/home/$user/qp2/bin/qpsh\"" >> .screenrc
 # start a qp shell when run
