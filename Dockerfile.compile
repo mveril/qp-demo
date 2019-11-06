@@ -50,11 +50,9 @@ RUN /bin/bash -c "source quantum_package.rc ; ninja"
 RUN /bin/bash -c "source quantum_package.rc ; qp_test -a"
 # Return to the user directory
 WORKDIR /home/$user/
-# Add source to bashrc
-RUN echo "source /home/$user/quantum_package/quantum_package.rc" >> ~/.bashrc
-## start a login shell when run
-#CMD ["/bin/bash","--login"]
-# start a qpsh when run
-CMD ["/bin/bash","--login", "-c", "qpsh"]
+RUN echo "set -g default-command /home/$user/qp2/bin/qpsh" >> .tmux.conf
+RUN echo "shell \"/home/$user/qp2/bin/qpsh\"" >> .screenrc
+# start a qp shell when run
+CMD ["./qp2/bin/qpsh"]
 
 
