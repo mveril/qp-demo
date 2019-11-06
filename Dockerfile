@@ -43,7 +43,6 @@ RUN mv quantum_package_static qp2
 RUN echo "set -g default-command /home/$user/qp2/bin/qpsh" >> .tmux.conf
 RUN echo "shell \"/home/$user/qp2/bin/qpsh\"" >> .screenrc
 # start a qp shell when run
-# I deleted /home/user because it's not necesary and can be a source of big if user arg is diferent to "user"
 CMD ["./qp2/bin/qpsh"]
 
 
