@@ -25,7 +25,7 @@ DockerCountCont() {
   docker ps -f ancestor="$1" -f "label=demo" -q | wc -l
 }
 # Selected image
-image=scemama/qp2
+image=qp2
 # Time limit for the container in the format of the timeout command
 timeout=10m
 # Number of container that running at the same time
