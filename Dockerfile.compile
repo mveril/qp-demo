@@ -20,8 +20,7 @@ ARG tz=Etc/UTC
 # enable manpages installation
 RUN sed -i 's,^path-exclude=/usr/share/man/,#path-exclude=/usr/share/man/,' /etc/dpkg/dpkg.cfg.d/excludes
 # Install all requierd packages
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install apt-utils -y
-RUN DEBIAN_FRONTEND=noninteractive apt-get install \
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install apt-utils -y \
 # Git for download quantum package
 git \
 # All necessary packages to compile and run quantum package
