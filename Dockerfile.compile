@@ -4,19 +4,16 @@
 FROM ubuntu:latest
 LABEL version="0.1" \
 maintainer.name="Mickaël Véril" \
-maintainer.email="" \
 quantum_package.author.name="Anthony Scemama" \
-quantum_package.author.email="" \
 quantum_package.url="https://quantumpackage.github.io/qp2" \
 quantum_package.repo="https://github.com/QuantumPackage/qp2" \
 laboratory.name="Laboratoire de Chimie et Physique Quantique (LCPQ)" \
 laboratory.url="http://www.lcpq.ups-tlse.fr/"
-# Build argument (can be changed at build time see buiild.sh for an example)
+# Build argument (can be changed at build time
 # This argument define the user name
 ARG user=user
 # This argument define timezone for tzdata requierd by qp_run
 ARG tz=Etc/UTC
-# We could add another argument to configure the language of the image
 # enable manpages installation
 RUN sed -i 's,^path-exclude=/usr/share/man/,#path-exclude=/usr/share/man/,' /etc/dpkg/dpkg.cfg.d/excludes
 # Install all requierd packages
