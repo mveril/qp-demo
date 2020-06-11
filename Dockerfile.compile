@@ -1,8 +1,8 @@
 # For help about how Dockerfiles work, see https://docs.docker.com/engine/reference/builder
 
 # This image is based from Ubuntu LTS
-FROM ubuntu:latest
-LABEL version="0.1" \
+FROM ubuntu:20.04
+LABEL version="1.0" \
 maintainer.name="Mickaël Véril" \
 quantum_package.author.name="Anthony Scemama" \
 quantum_package.url="https://quantumpackage.github.io/qp2" \
