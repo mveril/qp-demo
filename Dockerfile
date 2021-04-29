@@ -7,7 +7,7 @@ maintainer.name="Mickaël Véril" \
 quantum_package.author.name="Anthony Scemama" \
 quantum_package.url="https://quantumpackage.github.io/qp2" \
 quantum_package.repo="https://github.com/QuantumPackage/qp2" \
-quantum_package.demo.repo="https://github.com/mveril/qp-demo"
+quantum_package.demo.repo="https://github.com/mveril/qp-demo" \
 laboratory.name="Laboratoire de Chimie et Physique Quantique (LCPQ)" \
 laboratory.url="http://www.lcpq.ups-tlse.fr/"
 # Build argument (can be changed at build time
