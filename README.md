@@ -3,9 +3,7 @@ This is the component used in the [Quantum Package demo]( https://quantumpackage
 
 - examples: Examples included with quantum package docker image.
 
-- Dockerfile: Create docker image from prebuild quantum package `quantum_package_static.tar.gz`. This is the image of Quantum Package demo
-
-- Dockerfile.compile: Create docker image from the [Quantum Package GitHub repo](https://github.com/QuantumPackage/qp2).
+- Dockerfile: This is a multi-stage dockerfile used to create the docker image from the [Quantum Package GitHub repo](https://github.com/QuantumPackage/qp2)
 
 - run.sh: run the image in the context of the demo. (With isolated network, a limited number of container and a time limit)
 
