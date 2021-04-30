@@ -30,6 +30,11 @@ RUN ./configure -i all -c config/gfortran_avx.cfg
 # Compile the code to a static build
 RUN /bin/bash -c "source quantum_package.rc ; qp export_as_tgz"
 
+# Used to unpack QP2
+FROM ubuntu:20.04 AS unpack
+WORKDIR /tmp
+COPY --from=builder /home/builder/qp2/quantum_package_static.tar.gz .
+RUN tar -xf quantum_package_static.tar.gz
 
 # This image is based from Ubuntu LTS
 FROM ubuntu:20.04
@@ -66,10 +71,9 @@ ENV USER=$user
 WORKDIR /home/$user
 # Copy examples
 COPY --chown=$user:$user  examples examples
-# Copy QP2 static from build
-COPY --from=builder --chown=$user:$user /home/builder/qp2/quantum_package_static.tar.gz .
-# Extract static build
-RUN tar -xf quantum_package_static.tar.gz && mv quantum_package_static qp2 && rm quantum_package_static.tar.gz
+# Copy unpacked QP2 static
+RUN mkdir qp2
+COPY --from=unpack --chown=$user:$user /tmp/quantum_package_static ./qp2
 RUN echo "set -g default-command /home/$user/qp2/bin/qpsh" >> .tmux.conf
 RUN echo "shell \"/home/$user/qp2/bin/qpsh\"" >> .screenrc
 # start a qp shell when run
