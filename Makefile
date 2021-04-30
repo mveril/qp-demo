@@ -7,9 +7,6 @@ default:
 no-cache:
 	docker build -t $(IMAGE) --no-cache .
 
-compile-no-cache:
-	docker build -t $(IMAGE) -f Dockerfile.compile --no-cache . .
-
 network:
 	docker network create -o "com.docker.network.bridge.enable_icc"="false" $(NETWORK)
 
