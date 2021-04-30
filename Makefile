@@ -7,9 +7,6 @@ default:
 no-cache:
 	docker build -t $(IMAGE) --no-cache .
 
-compile:
-	docker build -t $(IMAGE) -f Dockerfile.compile .
-
 compile-no-cache:
 	docker build -t $(IMAGE) -f Dockerfile.compile --no-cache . .
 
