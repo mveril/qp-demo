@@ -35,7 +35,7 @@ RUN tar -xf quantum_package_static.tar.gz
 
 # This image is based from Ubuntu LTS
 FROM ubuntu:${UBUNTU_VERSION}
-LABEL version="1.1" \
+LABEL version="2.1.2" \
 maintainer.name="Mickaël Véril" \
 quantum_package.author.name="Anthony Scemama" \
 quantum_package.url="https://quantumpackage.github.io/qp2" \
