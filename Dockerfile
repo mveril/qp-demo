@@ -1,6 +1,6 @@
 # For help about how Dockerfiles work, see https://docs.docker.com/engine/reference/builder
-
-FROM ubuntu:20.04 AS builder
+ARG UBUNTU_VERSION=20.04
+FROM ubuntu:${UBUNTU_VERSION} AS builder
 # Build argument (can be changed at build time
 # This argument define timezone for tzdata requierd by qp_run
 ARG tz=Etc/UTC
@@ -31,13 +31,13 @@ RUN ./configure -i all -c config/gfortran_avx.cfg
 RUN /bin/bash -c "source quantum_package.rc ; qp export_as_tgz"
 
 # Used to unpack QP2
-FROM ubuntu:20.04 AS unpack
+FROM ubuntu:${UBUNTU_VERSION} AS unpack
 WORKDIR /tmp
 COPY --from=builder /home/builder/qp2/quantum_package_static.tar.gz .
 RUN tar -xf quantum_package_static.tar.gz
 
 # This image is based from Ubuntu LTS
-FROM ubuntu:20.04
+FROM ubuntu:${UBUNTU_VERSION}
 LABEL version="1.1" \
 maintainer.name="Mickaël Véril" \
 quantum_package.author.name="Anthony Scemama" \
