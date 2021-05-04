@@ -48,7 +48,7 @@ laboratory.url="http://www.lcpq.ups-tlse.fr/"
 ARG user=user
 # This argument define timezone for tzdata requierd by qp_run
 ARG tz=Etc/UTC
-# unminimize
+# install manpages and other requirements to an interactive session
 RUN ["/bin/sh","-c","yes | unminimize"]
 # Install all requierd packages
 RUN apt-get update && \
@@ -67,9 +67,10 @@ ENV USER=$user
 # Go to home
 WORKDIR /home/$user
 # Copy examples
-COPY --chown=$user:$user  examples examples
+COPY --chown=$user examples examples
 # Copy unpacked QP2 static
-COPY --from=unpack --chown=$user:$user /tmp/quantum_package_static ./qp2
+COPY --from=unpack --chown=$user /tmp/quantum_package_static qp2
+# Prepare tmux and screen to use QPSH
 RUN echo "set -g default-command /home/$user/qp2/bin/qpsh" >> .tmux.conf
 RUN echo "shell \"/home/$user/qp2/bin/qpsh\"" >> .screenrc
 # start a qp shell when run
