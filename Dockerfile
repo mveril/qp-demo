@@ -7,12 +7,11 @@ ARG tz=Etc/UTC
 # enable manpages installation
 RUN sed -i 's,^path-exclude=/usr/share/man/,#path-exclude=/usr/share/man/,' /etc/dpkg/dpkg.cfg.d/excludes
 # Install all requierd packages
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install apt-utils -y \
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
 # Git for download quantum package
 git \
 # All necessary packages to compile and run quantum package
-curl wget python gfortran gcc g++ build-essential unzip liblapack-dev pkg-config autoconf zlib1g zlib1g-dev libgmp-dev \
--y
+curl wget python gfortran gcc g++ build-essential unzip liblapack-dev pkg-config autoconf zlib1g zlib1g-dev libgmp-dev
 # Add user and switch to this user
 RUN adduser --disabled-password --gecos '' builder
 USER builder
@@ -55,9 +54,9 @@ ARG tz=Etc/UTC
 RUN sed -i 's,^path-exclude=/usr/share/man/,#path-exclude=/usr/share/man/,' /etc/dpkg/dpkg.cfg.d/excludes
 # Install all requierd packages
 RUN apt-get update && \
-DEBIAN_FRONTEND=noninteractive apt-get install \
+DEBIAN_FRONTEND=noninteractive apt-get install -y \
 python htop vim emacs screen tmux less wget curl tzdata man manpages-posix lsb-release \
- -y && \
+&& \
 apt-get autoremove && apt-get clean
 # Reconfigure tzdata with the good timezone
 RUN echo $tz > /etc/timezone && rm -rf /etc/localtime && echo "set mouse=" > ~/.vimrc
