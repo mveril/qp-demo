@@ -4,8 +4,6 @@ FROM ubuntu:${UBUNTU_VERSION} AS builder
 # Build argument (can be changed at build time
 # This argument define timezone for tzdata requierd by qp_run
 ARG tz=Etc/UTC
-# enable manpages installation
-RUN sed -i 's,^path-exclude=/usr/share/man/,#path-exclude=/usr/share/man/,' /etc/dpkg/dpkg.cfg.d/excludes
 # Install all requierd packages
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
 # Git for download quantum package
@@ -50,13 +48,13 @@ laboratory.url="http://www.lcpq.ups-tlse.fr/"
 ARG user=user
 # This argument define timezone for tzdata requierd by qp_run
 ARG tz=Etc/UTC
-# Enable manpages installation
-RUN sed -i 's,^path-exclude=/usr/share/man/,#path-exclude=/usr/share/man/,' /etc/dpkg/dpkg.cfg.d/excludes
+# unminimize
+RUN ["/bin/sh","-c","yes | unminimize"]
 # Install all requierd packages
 RUN apt-get update && \
-DEBIAN_FRONTEND=noninteractive apt-get install -y \
+DEBIAN_FRONTEND=noninteractive apt-get install \
 python htop vim emacs screen tmux less wget curl tzdata man manpages-posix lsb-release \
-&& \
+ -y && \
 apt-get autoremove && apt-get clean
 # Reconfigure tzdata with the good timezone
 RUN echo $tz > /etc/timezone && rm -rf /etc/localtime && echo "set mouse=" > ~/.vimrc
