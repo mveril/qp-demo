@@ -31,7 +31,7 @@ RUN ./configure -i all -c config/gfortran_avx.cfg
 RUN /bin/bash -c "source quantum_package.rc ; qp export_as_tgz"
 
 # Used to unpack QP2
-FROM ubuntu:${UBUNTU_VERSION} AS unpack
+FROM busybox AS unpack
 WORKDIR /tmp
 COPY --from=builder /home/builder/qp2/quantum_package_static.tar.gz .
 RUN tar -xf quantum_package_static.tar.gz
