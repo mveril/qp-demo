@@ -72,7 +72,6 @@ WORKDIR /home/$user
 # Copy examples
 COPY --chown=$user:$user  examples examples
 # Copy unpacked QP2 static
-RUN mkdir qp2
 COPY --from=unpack --chown=$user:$user /tmp/quantum_package_static ./qp2
 RUN echo "set -g default-command /home/$user/qp2/bin/qpsh" >> .tmux.conf
 RUN echo "shell \"/home/$user/qp2/bin/qpsh\"" >> .screenrc
