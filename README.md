@@ -1,5 +1,5 @@
-# qp-demo
-This is the component used in the [Quantum Package demo]( https://quantumpackage.github.io/qp2/page/try)
+# qp_demo
+qp_demo is the component used in the [Quantum Package demo]( https://quantumpackage.github.io/qp2/page/try)
 This repo contains
 - `examples`: Examples included with quantum package docker image.
 
