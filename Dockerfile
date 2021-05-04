@@ -28,7 +28,7 @@ WORKDIR /home/builder/qp2
 RUN ./configure -i all -c config/gfortran_avx.cfg
 # source don't work with /bin/sh (used by the run command so I use bash)
 # Compile the code to a static build
-RUN /bin/bash -c "source quantum_package.rc ; qp export_as_tgz"
+RUN ["/bin/bash", "-c", "source quantum_package.rc ; qp export_as_tgz"]
 
 # Used to unpack QP2
 FROM busybox AS unpack
