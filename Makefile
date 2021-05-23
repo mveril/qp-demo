@@ -1,4 +1,4 @@
-IMAGE = qp2
+IMAGE = mveril/qp_demo
 NETWORK = demo-net
 
 default:
