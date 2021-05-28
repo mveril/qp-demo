@@ -53,7 +53,7 @@ RUN ["/bin/sh","-c","yes | unminimize"]
 # Install all requierd packages
 RUN apt-get update && \
 DEBIAN_FRONTEND=noninteractive apt-get install \
-python htop vim emacs screen tmux less wget curl tzdata man manpages-posix lsb-release \
+python htop vim emacs-nox screen tmux less wget curl tzdata man manpages-posix lsb-release \
  -y && \
 apt-get autoremove && apt-get clean
 # Reconfigure tzdata with the good timezone
