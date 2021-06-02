@@ -48,14 +48,11 @@ laboratory.url="http://www.lcpq.ups-tlse.fr/"
 ARG user=user
 # This argument define timezone for tzdata requierd by qp_run
 ARG tz=Etc/UTC
-# install manpages and other requirements to an interactive session
-RUN ["/bin/sh","-c","yes | unminimize"]
-# Install all requierd packages
-RUN apt-get update && \
-DEBIAN_FRONTEND=noninteractive apt-get install \
+# Unminimize and install all requierd packages
+RUN yes | unminimize && apt-get update && \
+DEBIAN_FRONTEND=noninteractive apt-get install -y \
 python htop vim emacs-nox screen tmux less wget curl tzdata man manpages-posix lsb-release \
- -y && \
-apt-get autoremove && apt-get clean
+ && rm -rf /var/lib/apt/lists/*
 # Reconfigure tzdata with the good timezone
 RUN echo $tz > /etc/timezone && rm -rf /etc/localtime && echo "set mouse=" > ~/.vimrc
 RUN dpkg-reconfigure -f noninteractive tzdata
