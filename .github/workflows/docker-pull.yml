@@ -59,7 +59,7 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/qp_demo:${{ steps.extract_docker_tag.output.tag }}
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/qp_demo:${{ steps.extract_docker_tag.outputs.tag }}
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
