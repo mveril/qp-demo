@@ -45,10 +45,10 @@ jobs:
         id: extract_docker_tag
         shell: bash
         run: |
-          if ${{ steps.extract_branch.outputs.branch }} -eq "master"; then
+          if '${{ steps.extract_branch.outputs.branch }}' -eq "master"; then
             echo "##[set-output name=tag;]$(echo 'latest')"
           elif [[${{ steps.extract_branch.outputs.branch }} = release_*]]; then
-            echo "##[set-output name=tag;]$(echo ${{ steps.extract_branch.outputs.branch }} | cut -d '_' -f2-)"
+            echo "##[set-output name=tag;]$(echo '${{ steps.extract_branch.outputs.branch }}' | cut -d '_' -f2-)"
           else
             echo "##[set-output name=tag;]$(echo 'ghtest')"
           fi
