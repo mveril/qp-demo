@@ -29,10 +29,10 @@ jobs:
         id: extract_docker_tag
         shell: bash
         run: |
-          if [ "${GITHUB_REF#refs/heads/}" == "master" ]; then
+          if [ "${{ GITHUB_REF#refs/heads/ }}" == "master" ]; then
             echo "##[set-output name=tag;]$(echo 'latest')"
-          elif [[ "${GITHUB_REF#refs/heads/}" == release_* ]]; then
-            echo "##[set-output name=tag;]$(echo '${GITHUB_REF#refs/heads/}' | cut -d '_' -f2-)"
+          elif [[ "${{ GITHUB_REF#refs/heads/ }}" == release_* ]]; then
+            echo "##[set-output name=tag;]$(echo '${{ GITHUB_REF#refs/heads/ }}' | cut -d '_' -f2-)"
           else
             echo "##[set-output name=tag;]$(echo 'ghtest')"
           fi
