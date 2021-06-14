@@ -58,7 +58,7 @@ jobs:
         with:
           context: ./
           file: ./Dockerfile
-          push: true
+          push: false
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/qp_demo:${{ steps.extract_docker_tag.outputs.tag }}
 
       - name: Image digest
