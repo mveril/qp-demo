@@ -36,7 +36,7 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: false
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/qp_demo:${{ GITHUB_REF#refs/heads/ }}.${{ GITHUB_SHA::8 }}
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/qp_demo:${GITHUB_REF#refs/heads/}.${GITHUB_SHA::8}
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
